@@ -3,14 +3,6 @@
     "description": "Project converted from platform-specific vcpkg txt files",
     "dependencies": [
         "fmt",
-        "llhttp",
-        "gtest",
-        {
-            "name": "curl",
-            "features": [
-                "mbedtls"
-            ]
-        },
         "rapidjson"
     ]
 }
