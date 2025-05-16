@@ -33,7 +33,7 @@ jobs:
         with:
           vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
           vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
-          vcpkgJsonGlob: "${{ github.workspace }}/workspace/vcpkg.json"
+          vcpkgJsonGlob: "vcpkg.json"
           runVcpkgInstall: true
           doNotCache: false
         env:
