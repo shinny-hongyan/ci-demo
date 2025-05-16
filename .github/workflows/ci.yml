@@ -1,0 +1,35 @@
+name: build
+
+on: push
+
+jobs:
+  build-ubuntu:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        build-type: [Release]
+        include:
+          - os: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+          submodules: recursive
+
+      - name: Run vcpkg submodules
+        uses: lukka/run-vcpkg@v7
+        with:
+          vcpkgArguments: "@${{ github.workspace }}/docker-ci/workspace/vcpkg-x64-linux.txt"
+          vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
+          appendedCacheKey: ${{ hashFiles('docker-ci/workspace/vcpkg-x64-linux.txt') }}
+
+      - name: Run vcpkg
+        uses: lukka/run-vcpkg@v7
+        with:
+          vcpkgArguments: "@${{ github.workspace }}/workspace/vcpkg-x64-linux.txt"
+          vcpkgDirectory: "${{ github.workspace }}/vcpkg"
+          appendedCacheKey: ${{ hashFiles('workspace/vcpkg-x64-linux.txt') }}
