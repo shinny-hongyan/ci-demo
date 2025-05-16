@@ -36,3 +36,5 @@ jobs:
           vcpkgJsonGlob: 'workspace/vcpkg.json'
           runVcpkgInstall: true
           doNotCache: false
+        env:
+          VCPKG_BINARY_SOURCES: 'clear;x-gha,readwrite'
