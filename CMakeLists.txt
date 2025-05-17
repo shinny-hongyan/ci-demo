@@ -6,9 +6,8 @@ project(RapidJSONDemo)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 查找 RapidJSON 的安装位置
-# 方式1: 如果 RapidJSON 是通过包管理器安装的
-find_package(RapidJSON QUIET)
+find_package(RapidJSON CONFIG REQUIRED)
+target_link_libraries(rapidjson_demo PRIVATE RapidJSON rapidjson)
 
 # 添加可执行文件
 add_executable(rapidjson_demo main.cpp)
