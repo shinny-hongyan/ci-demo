@@ -36,12 +36,9 @@ jobs:
       #     vcpkgJsonGlob: "workspace/vcpkg.json"
 
       - name: Build
-        uses: lukka/run-cmake@v3
+        uses: lukka/run-cmake@v10
         with:
-          cmakeListsOrSettingsJson: CMakeListsTxtBasic
           cmakeListsTxtPath: "${{ github.workspace }}/CMakeLists.txt"
-          useVcpkgToolchainFile: true
-          buildDirectory: "${{ github.workspace }}/build"
 
       - name: Test
         run: |
