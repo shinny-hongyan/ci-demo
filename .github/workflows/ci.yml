@@ -20,14 +20,6 @@ jobs:
           lfs: true
           submodules: recursive
 
-      # - name: Run vcpkg submodules
-      #   uses: lukka/run-vcpkg@v7
-      #   with:
-      #     vcpkgArguments: "@${{ github.workspace }}/docker-ci/workspace/vcpkg-x64-linux.txt"
-      #     vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
-      #     vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
-      #     appendedCacheKey: ${{ hashFiles('docker-ci/workspace/vcpkg-x64-linux.txt') }}
-
       - name: Clean build directory
         run: |
           rm -rf build
@@ -42,7 +34,8 @@ jobs:
         with:
           vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
           vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
-          vcpkgJsonGlob: "vcpkg.json"
+          vcpkgJsonGlob: "workspace/vcpkg.json"
+          runVcpkgInstall: true
 
       - name: Build
         uses: lukka/run-cmake@v10
@@ -50,6 +43,9 @@ jobs:
           cmakeListsTxtPath: "${{ github.workspace }}/CMakeLists.txt"
           configurePreset: "default"
           buildPreset: "release"
+        env:
+          VCPKG_BINARY_SOURCES: "clear;x-manifest,readwrite"
+
 
       - name: Test
         run: |
