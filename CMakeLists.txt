@@ -6,10 +6,11 @@ project(RapidJSONDemo)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Find RapidJSON using MODULE mode instead of CONFIG mode
-find_package(RapidJSON REQUIRED)
-
-# Alternatively, we can directly use the vcpkg-installed headers
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/docker-ci/vcpkg/installed/x64-linux/include)
+# For header-only libraries like RapidJSON, we can use find_path instead of find_package
+find_package(RapidJSON CONFIG REQUIRED)
+if (NOT RapidJSON_FOUND)
+    message(FATAL_ERROR "RapidJSON not found")
+endif()
 
 add_executable(rapidjson_demo main.cpp)
+target_link_libraries(rapidjson_demo PRIVATE RapidJSON rapidjson)
