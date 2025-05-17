@@ -35,12 +35,20 @@ jobs:
           rm -rf CMakeCache.txt
           rm -rf CMakeFiles
 
+      # - name: Run vcpkg
+      #   uses: lukka/run-vcpkg@v11
+      #   with:
+      #     vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
+      #     vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
+      #     vcpkgJsonGlob: "vcpkg.json"
+
       - name: Run vcpkg
-        uses: lukka/run-vcpkg@v11.5
+        uses: lukka/run-vcpkg@v7
         with:
+          vcpkgArguments: "@${{ github.workspace }}/workspace/vcpkg-x64-linux.txt"
           vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
           vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
-          vcpkgJsonGlob: "workspace/vcpkg.json"
+          appendedCacheKey: ${{ hashFiles('workspace/vcpkg-x64-linux.txt') }}
 
       - name: Install CMake
         uses: lukka/get-cmake@latest
