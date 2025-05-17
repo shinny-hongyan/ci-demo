@@ -28,6 +28,8 @@ jobs:
 
       - name: Install CMake
         uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: 3.21.0
 
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v10
