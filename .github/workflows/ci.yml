@@ -29,12 +29,12 @@ jobs:
       #     appendedCacheKey: ${{ hashFiles('docker-ci/workspace/vcpkg-x64-linux.txt') }}
 
       - name: Run vcpkg
-        uses: lukka/run-vcpkg@v7
+        uses: lukka/run-vcpkg@v11.5
         with:
-          vcpkgArguments: "@${{ github.workspace }}/workspace/vcpkg-x64-linux.txt"
           vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
           vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
-          appendedCacheKey: ${{ hashFiles('workspace/vcpkg-x64-linux.txt') }}
+          vcpkgJsonGlob: "workspace/vcpkg.json"
+          runVcpkgInstall: true
 
       - name: Build
         uses: lukka/run-cmake@v3
