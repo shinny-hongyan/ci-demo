@@ -1,7 +1,0 @@
-{
-    "name": "rapidjson-demo",
-    "description": "Project converted from platform-specific vcpkg txt files",
-    "dependencies": [
-        "rapidjson"
-    ]
-}

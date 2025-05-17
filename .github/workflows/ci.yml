@@ -45,9 +45,7 @@ jobs:
           cmakeListsTxtPath: "${{ github.workspace }}/CMakeLists.txt"
           configurePreset: "default"
           buildPreset: "release"
-        env:
-          VCPKG_BINARY_SOURCES: "clear;x-manifest,readwrite"
-
+          configurePresetAdditionalArgs: "['-DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/docker-ci/vcpkg/scripts/buildsystems/vcpkg.cmake']"
 
       - name: Test
         run: |
