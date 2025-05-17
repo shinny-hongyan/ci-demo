@@ -9,4 +9,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(RapidJSON CONFIG REQUIRED)
 
 add_executable(rapidjson_demo main.cpp)
-target_link_libraries(rapidjson_demo PRIVATE RapidJSON rapidjson)
+
+# RapidJSON is a header-only library, so we only need to include its directories
+target_include_directories(rapidjson_demo PRIVATE ${RAPIDJSON_INCLUDE_DIRS})
