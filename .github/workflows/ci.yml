@@ -20,7 +20,6 @@ jobs:
           lfs: true
           submodules: recursive
 
-          
       # - name: Run vcpkg submodules
       #   uses: lukka/run-vcpkg@v7
       #   with:
@@ -35,6 +34,9 @@ jobs:
           rm -rf CMakeCache.txt
           rm -rf CMakeFiles
 
+      - name: Install CMake
+        uses: lukka/get-cmake@latest
+
       - name: Run vcpkg
         uses: lukka/run-vcpkg@v10
         with:
@@ -42,24 +44,12 @@ jobs:
           vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
           vcpkgJsonGlob: "vcpkg.json"
 
-      # - name: Run vcpkg
-      #   uses: lukka/run-vcpkg@v7
-      #   with:
-      #     vcpkgArguments: "@${{ github.workspace }}/workspace/vcpkg-x64-linux.txt"
-      #     vcpkgDirectory: "${{ github.workspace }}/docker-ci/vcpkg"
-      #     vcpkgGitCommitId: 9dd12f8d791f6fa4e396adbebc714d51cbee2143
-      #     appendedCacheKey: ${{ hashFiles('workspace/vcpkg-x64-linux.txt') }}
-
-      - name: Install CMake
-        uses: lukka/get-cmake@latest
-
       - name: Build
         uses: lukka/run-cmake@v10
         with:
           cmakeListsTxtPath: "${{ github.workspace }}/CMakeLists.txt"
           configurePreset: "default"
           buildPreset: "release"
-          
 
       - name: Test
         run: |
