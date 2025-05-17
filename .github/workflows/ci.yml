@@ -42,7 +42,6 @@ jobs:
           cmakeListsTxtPath: "${{ github.workspace }}/CMakeLists.txt"
           useVcpkgToolchainFile: true
           buildDirectory: "${{ github.workspace }}/build"
-          cmakeBuildType: "${{ matrix.build-type }}"
 
       - name: Test
         run: |
