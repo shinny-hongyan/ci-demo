@@ -2,26 +2,28 @@
     "version": 3,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 10,
+        "minor": 21,
         "patch": 0
     },
     "configurePresets": [
         {
-            "name": "release",
-            "hidden": false,
-            "toolchainFile": "${workspaceFolder}/docker-ci/vcpkg/scripts/buildsystems/vcpkg.cmake",
-            "binaryDir": "${workspaceFolder}/build/",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
+            "name": "default",
+            "displayName": "Default Config",
+            "description": "Default build using Unix Makefiles",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build"
         }
     ],
     "buildPresets": [
         {
             "name": "release",
-            "hidden": false,
-            "jobs": 1,
-            "configurePreset": "release"
+            "configurePreset": "default",
+            "configuration": "Release"
+        },
+        {
+            "name": "debug",
+            "configurePreset": "default",
+            "configuration": "Debug"
         }
     ]
 }
