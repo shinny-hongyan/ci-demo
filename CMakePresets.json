@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 10,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "release",
+            "hidden": false,
+            "toolchainFile": "${workspaceFolder}/docker-ci/vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "binaryDir": "${workspaceFolder}/build/",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "build-release-all",
+            "hidden": false,
+            "jobs": 1,
+            "configurePreset": "release"
+        }
+    ]
+}
